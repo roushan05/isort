@@ -416,6 +416,8 @@ class SortImports(object):
 
             comments_above = self.comments['above']['straight'].pop(module, None)
             if comments_above:
+                if section_output and self.config.get("ensure_newline_before_comments"):
+                    section_output.append("")
                 section_output.extend(comments_above)
             section_output.append(self._add_comments(self.comments['straight'].get(module), import_definition))
 
@@ -471,6 +473,8 @@ class SortImports(object):
                         from_comments = self.comments['straight'].get('{}.{}'.format(module, from_import))
                         above_comments = self.comments['above']['from'].pop(module, None)
                         if above_comments:
+                            if section_output and self.config.get("ensure_newline_before_comments"):
+                                section_output.append("")
                             section_output.extend(above_comments)
 
                         section_output.append(self._add_comments(from_comments,
@@ -493,6 +497,8 @@ class SortImports(object):
                                                                    comment)
                             above_comments = self.comments['above']['from'].pop(module, None)
                             if above_comments:
+                                if section_output and self.config.get("ensure_newline_before_comments"):
+                                    section_output.append("")
                                 section_output.extend(above_comments)
                             section_output.append(self._wrap(single_import_line))
                             from_imports.remove(from_import)
@@ -539,6 +545,8 @@ class SortImports(object):
                 if import_statement:
                     above_comments = self.comments['above']['from'].pop(module, None)
                     if above_comments:
+                        if section_output and self.config.get("ensure_newline_before_comments"):
+                            section_output.append("")
                         section_output.extend(above_comments)
                     section_output.append(import_statement)
 
